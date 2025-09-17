@@ -1,25 +1,7 @@
 using UnityEngine;
 
-class Hero
+public class Hero : Charactor
 {
-    //Attribute
-   private string name;
-   public string Name 
-    { 
-        get { return name; } 
-        set { if (string.IsNullOrEmpty(value)) name = "Unknown Hero";
-              else {name = value;}
-        }
-    }
-
-   private int health;
-   public int Health 
-    {
-        get { return health; }
-        set { if ( value >= 0 ) health = value;
-              else health = 0;
-            } 
-    }
 
     private int gold;
     public int Gold 
@@ -31,45 +13,32 @@ class Hero
             }  
     }
 
-    public int AttackPower { get; private set; }
-
     //Constructor (For create object)
-    public Hero(string newName, int newHealth, int newAttackPower)
+    /*public void Init(string newName, int newHealth, int newAttackPower)
     {
-        Name = newName;
-        Health = newHealth;
-        AttackPower = newAttackPower;
+        base.Init(newName, newHealth, newAttackPower);
+        Gold = 0;
+    }*/
+
+    public override void Init(string newName, int newHealth, int newAttackPower)//Same Name Same Parameter but Difference Inside (Medthod Overriding)
+    {
+        base.Init(newName, newHealth, newAttackPower);
         Gold = 0;
     }
 
-    public void ShowStat()
+    public override void ShowStat()
     {
-        Debug.Log($"Hero Name: {Name} , Health: {Health} , Gold: {Gold}");
+        base.ShowStat();
+        Debug.Log($"{Name} Current Gold : {Gold} , IsAlive {IsAlive()} ");
     }
 
-    public void TakeDamage(int damageValue)
-    {
-        Health -= damageValue;
-    }
+    //Initialize
 
-    public void Attack(Monsters target)
-    {
-        Debug.Log($"{Name} attacks {target.Name} for {AttackPower} damage!");
-        target.TakeDamage(AttackPower);
-    }
 
-    public void EarnGold(int amount)
+    public void EarnGold(int lootGold)
     {
-        if (amount > 0) 
-        { 
-             Gold += amount;
-        }
+        Gold += lootGold;
+        Debug.Log($" {Name} get {Gold} Gold.");
     }
-
-    public bool IsAlive()
-    {
-        return health > 0; 
-    }
-
 
 }

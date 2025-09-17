@@ -4,12 +4,38 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    private List<Monsters> monsters = new List<Monsters>();
 
+    public Hero hero1;
+    public List<Monsters> monstersPrefabs; //For Prefabs
+    public List<Monsters> monsters = new List<Monsters>(); //Monster
+    public Monsters currentMonster;
+
+    //private List<Monsters> monsters = new List<Monsters>();
     // Start is called once(ครั้งเดียว) before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Create Hero
+        hero1.Init("Yasuo", 50, 10);
+        hero1.ShowStat();
+
+        //Monster 1 Goblin
+        currentMonster = Instantiate(monstersPrefabs[0]);
+        currentMonster.Init("Goblin", 50, 10, 5);
+        monsters.Add(currentMonster);
+        currentMonster.ShowStat();
+
+        //Monster 2 Orc
+        currentMonster = Instantiate(monstersPrefabs[1]);
+        currentMonster.Init("Orc", 100, 15, 10);
+        monsters.Add(currentMonster);
+        currentMonster.ShowStat();
+
+        //Monster 3 Dragon
+        currentMonster = Instantiate(monstersPrefabs[2]);
+        currentMonster.Init("Dragon", 150, 20, 15);
+        monsters.Add(currentMonster);
+        currentMonster.ShowStat();
+
+        /*Create Hero
         Hero hero = new Hero("Yasuo",50,20);
 
         //Create Monsters
@@ -62,7 +88,7 @@ public class Main : MonoBehaviour
 
         monster2.Attack(hero);
 
-        hero.ShowStat();
+        hero.ShowStat();*/
 
 
 
